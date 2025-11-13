@@ -8,6 +8,8 @@ import { Home, Bell, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { storage } from "@/lib/storage";
 import { cn } from "@/lib/utils";
+import logoLight from "@/assets/3ARBOON.png";
+import logoDark from "@/assets/3ARBOON_white.png";
 
 export function VendorNav() {
   const pathname = usePathname();
@@ -40,14 +42,15 @@ export function VendorNav() {
     <nav className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <Image 
-            src={theme === "dark" ? "/3ARBOON_white.png" : "/3ARBOON.png"}
-            alt="3ARBOON" 
-            width={100}
-            height={26}
-            className="h-5 sm:h-6 w-auto"
-            priority
-          />
+          <div className="h-16 sm:h-20 w-52 sm:w-64 ml-[-30px] relative">
+            <Image 
+              src={theme === "dark" ? logoDark : logoLight}
+              alt="3ARBOON" 
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
           <div className="flex items-center gap-1">
             <Button
               variant="ghost"

@@ -233,27 +233,27 @@ By proceeding, both parties agree to these terms and acknowledge their understan
     const variants: Record<Order["status"], { label: string; className: string }> = {
       pending_payment: { 
         label: "Pending Payment", 
-        className: "bg-gray-400/10 border-gray-400/15 text-gray-500 dark:text-gray-300" 
+        className: "bg-gray-400/10 border-gray-400/15 text-gray-500 dark:bg-blue-900/80 dark:border-blue-500 dark:text-white" 
       },
       payment_reserved: { 
         label: "Payment Reserved", 
-        className: "bg-yellow-500/10 border-yellow-500/15 text-yellow-600 dark:text-yellow-400" 
+        className: "bg-yellow-500/10 border-yellow-500/15 text-yellow-600 dark:bg-orange-900/80 dark:border-orange-500 dark:text-white" 
       },
       in_production: { 
         label: "In Production", 
-        className: "bg-orange-500/10 border-orange-500/15 text-orange-600 dark:text-orange-400" 
+        className: "bg-orange-500/10 border-orange-500/15 text-orange-600 dark:bg-orange-900/80 dark:border-orange-500 dark:text-white" 
       },
       completed: { 
         label: "Completed", 
-        className: "bg-green-500/10 border-green-500/15 text-green-600 dark:text-green-400" 
+        className: "bg-green-500/10 border-green-500/15 text-green-600 dark:bg-green-900/80 dark:border-green-500 dark:text-white" 
       },
       final_payment_pending: { 
         label: "Final Payment Pending", 
-        className: "bg-gray-400/10 border-gray-400/15 text-gray-500 dark:text-gray-300" 
+        className: "bg-gray-400/10 border-gray-400/15 text-gray-500 dark:bg-blue-900/80 dark:border-blue-500 dark:text-white" 
       },
       final_payment_done: { 
         label: "Paid", 
-        className: "bg-green-500/10 border-green-500/15 text-green-600 dark:text-green-400" 
+        className: "bg-green-500/10 border-green-500/15 text-green-600 dark:bg-green-900/80 dark:border-green-500 dark:text-white" 
       },
     };
     const config = variants[status];

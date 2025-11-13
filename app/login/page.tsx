@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { storage } from "@/lib/storage";
+import logoLight from "@/assets/3ARBOON.png";
+import logoDark from "@/assets/3ARBOON_white.png";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -31,14 +33,15 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-muted/30 gap-6">
-      <Image 
-        src={theme === "dark" ? "/3ARBOON_white.png" : "/3ARBOON.png"}
-        alt="3ARBOON" 
-        width={180}
-        height={45}
-        className="h-9 sm:h-10 w-auto"
-        priority
-      />
+      <div className="h-16 sm:h-20 w-52 sm:w-64 relative ">
+        <Image 
+          src={theme === "dark" ? logoDark : logoLight}
+          alt="3ARBOON" 
+          fill
+          className="object-contain"
+          priority
+        />
+      </div>
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-xl sm:text-2xl">Vendor Login</CardTitle>
