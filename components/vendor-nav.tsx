@@ -14,11 +14,11 @@ import logoDark from "@/assets/3ARBOON_white.png";
 export function VendorNav() {
   const pathname = usePathname();
   const router = useRouter();
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   useEffect(() => {
     // Load theme
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" || "light";
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" || "dark";
     setTheme(savedTheme);
 
     // Listen for theme changes

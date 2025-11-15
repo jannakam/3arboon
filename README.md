@@ -81,3 +81,4 @@ All data is stored in browser localStorage:
 
 Note: This is a prototype. For production use, integrate with a real database and authentication system.
 
+

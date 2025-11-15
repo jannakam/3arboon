@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { User, Moon, Sun } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { User, Moon, Sun, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +12,7 @@ import { storage } from "@/lib/storage";
 import { VendorProfile } from "@/lib/types";
 
 export default function ProfilePage() {
+  const router = useRouter();
   const { toast } = useToast();
   const [profile, setProfile] = useState<VendorProfile>({
     name: "",
@@ -18,17 +20,28 @@ export default function ProfilePage() {
     phone: "",
     businessName: "",
   });
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
 
-  useEffect(() => {
+  const loadProfile = () => {
     const savedProfile = storage.getVendorProfile();
     if (savedProfile) {
       setProfile(savedProfile);
     }
+  };
+
+  useEffect(() => {
+    loadProfile();
     
     // Load theme
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" || "light";
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" || "dark";
     setTheme(savedTheme);
+
+    // Refresh profile when window regains focus (user returns from subscription page)
+    const handleFocus = () => {
+      loadProfile();
+    };
+    window.addEventListener("focus", handleFocus);
+    return () => window.removeEventListener("focus", handleFocus);
   }, []);
 
   const toggleTheme = () => {
@@ -61,13 +74,12 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="space-y-4 sm:space-y-6 max-w-2xl mx-auto">
-      <h1 className="text-2xl sm:text-3xl font-bold">Profile</h1>
+    <div className="space-y-5 sm:space-y-7 max-w-2xl mx-auto">
 
       <Card>
         <CardHeader className="pb-4">
           <div className="flex items-center gap-3 sm:gap-4">
-            <div className="h-12 w-12 sm:h-16 sm:w-16 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+            <div className="h-12 w-12 sm:h-16 sm:w-16 rounded-full flex items-center justify-center flex-shrink-0 bg-muted border border-primary/20 text-primary">
               <User className="h-6 w-6 sm:h-8 sm:w-8" />
             </div>
             <div className="min-w-0 flex-1">
@@ -123,18 +135,65 @@ export default function ProfilePage() {
                 className="text-sm h-9"
               />
             </div>
-            <Button type="submit" variant="ghost" className="w-full h-9 text-sm sm:text-base sm:h-10 border border-input">
+            <Button
+              type="submit"
+              variant="ghost"
+              className="w-full h-9 text-sm sm:text-base sm:h-10 border border-primary/40 text-primary hover:bg-primary/10 dark:border-primary/30 dark:text-primary-foreground dark:hover:bg-primary/20"
+            >
               Save Changes
             </Button>
           </form>
         </CardContent>
       </Card>
 
+      {/* Subscription Plan */}
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base sm:text-lg">Subscription Plan</CardTitle>
+          <CardDescription className="text-xs sm:text-sm">
+            Your current subscription package
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            <div className="space-y-2">
+              <p className="text-sm sm:text-base font-medium">
+                {profile.subscriptionPlan === "package_a" && "Package A - Default"}
+                {profile.subscriptionPlan === "package_b" && "Package B - Recommended"}
+                {profile.subscriptionPlan === "package_c" && "Package C"}
+                {!profile.subscriptionPlan && "No plan selected"}
+              </p>
+              {profile.subscriptionPlan && (
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  {profile.subscriptionPlan === "package_a" && "1% per e-Pay transaction • 15,000 KWD daily limit"}
+                  {profile.subscriptionPlan === "package_b" && "250 fils per e-Pay transaction • 25,000 KWD daily limit"}
+                  {profile.subscriptionPlan === "package_c" && "350 fils per e-Pay transaction • 40,000 KWD daily limit"}
+                </p>
+              )}
+            </div>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                // Store that we're coming from profile so we can redirect back
+                sessionStorage.setItem("subscription_return", "/vendor/profile");
+                router.push("/vendor/subscribe");
+              }}
+              className="w-full h-9 text-sm sm:text-base sm:h-10 border border-primary/40 text-primary hover:bg-primary/10 dark:border-primary/30 dark:text-primary-foreground dark:hover:bg-primary/20"
+            >
+              <Settings className="h-4 w-4 mr-2" />
+              {profile.subscriptionPlan ? "Change Plan" : "Select Plan"}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Theme Switcher */}
       <Card>
-        <CardHeader>
+        <CardHeader className="pb-3">
           <CardTitle className="text-base sm:text-lg">Appearance</CardTitle>
-          <CardDescription className="text-xs sm:text-sm">Customize how the app looks</CardDescription>
+          <CardDescription className="text-xs sm:text-sm">
+            Customize how the app looks
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between">
@@ -145,10 +204,10 @@ export default function ProfilePage() {
               </p>
             </div>
             <Button
-              variant="ghost"
               size="icon"
               onClick={toggleTheme}
-              className="h-9 w-9 sm:h-10 sm:w-10 border border-input"
+              variant="ghost"
+              className="h-9 w-9 sm:h-10 sm:w-10 border border-primary/30 text-primary hover:bg-primary/10 dark:border-primary/25 dark:text-primary-foreground dark:hover:bg-primary/20"
             >
               {theme === "light" ? (
                 <Moon className="h-4 w-4 sm:h-5 sm:w-5" />

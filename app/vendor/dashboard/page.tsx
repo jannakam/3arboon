@@ -233,27 +233,27 @@ By proceeding, both parties agree to these terms and acknowledge their understan
     const variants: Record<Order["status"], { label: string; className: string }> = {
       pending_payment: { 
         label: "Pending Payment", 
-        className: "bg-gray-400/10 border-gray-400/15 text-gray-500 dark:bg-blue-900/80 dark:border-blue-500 dark:text-white" 
+        className: "bg-amber-50 border-amber-100 text-amber-600 dark:bg-amber-900/20 dark:border-amber-500/30 dark:text-white" 
       },
       payment_reserved: { 
         label: "Payment Reserved", 
-        className: "bg-yellow-500/10 border-yellow-500/15 text-yellow-600 dark:bg-orange-900/80 dark:border-orange-500 dark:text-white" 
+        className: "bg-rose-50 border-rose-100 text-rose-600 dark:bg-rose-900/20 dark:border-rose-500/30 dark:text-white" 
       },
       in_production: { 
         label: "In Production", 
-        className: "bg-orange-500/10 border-orange-500/15 text-orange-600 dark:bg-orange-900/80 dark:border-orange-500 dark:text-white" 
+        className: "bg-teal-500/10 border-teal-500/15 text-teal-600 dark:bg-teal-900/20 dark:border-teal-500/30 dark:text-white" 
       },
       completed: { 
         label: "Completed", 
-        className: "bg-green-500/10 border-green-500/15 text-green-600 dark:bg-green-900/80 dark:border-green-500 dark:text-white" 
+        className: "bg-lime-50 border-lime-100 text-lime-600 dark:bg-lime-900/20 dark:border-lime-500/30 dark:text-white" 
       },
       final_payment_pending: { 
         label: "Final Payment Pending", 
-        className: "bg-gray-400/10 border-gray-400/15 text-gray-500 dark:bg-blue-900/80 dark:border-blue-500 dark:text-white" 
+        className: "bg-amber-50 border-amber-100 text-amber-600 dark:bg-amber-900/20 dark:border-amber-500/30 dark:text-white" 
       },
       final_payment_done: { 
         label: "Paid", 
-        className: "bg-green-500/10 border-green-500/15 text-green-600 dark:bg-green-900/80 dark:border-green-500 dark:text-white" 
+        className: "bg-lime-50 border-lime-100 text-lime-600 dark:bg-lime-900/20 dark:border-lime-500/30 dark:text-white" 
       },
     };
     const config = variants[status];
@@ -408,45 +408,45 @@ By proceeding, both parties agree to these terms and acknowledge their understan
 
       {/* Earnings Overview */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <Card>
+        <Card className="bg-teal-500/10 border-teal-500/15 text-teal-600 dark:bg-teal-900/20 dark:border-teal-500/30">
           <CardHeader className="pb-2">
             <CardDescription className="text-xs">Total Earned</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-500 dark:text-green-400">
+            <div className="text-2xl font-bold text-teal-500 dark:text-teal-200">
               ${earnings.totalEarnings.toFixed(2)}
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-500/30">
           <CardHeader className="pb-2">
             <CardDescription className="text-xs">Pending Payment</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-orange-500 dark:text-orange-400">
+            <div className="text-2xl font-bold text-amber-500 dark:text-amber-200">
               ${earnings.pendingEarnings.toFixed(2)}
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-500/30">
           <CardHeader className="pb-2">
             <CardDescription className="text-xs">Reserved Funds</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-yellow-500 dark:text-yellow-400">
+            <div className="text-2xl font-bold text-rose-500 dark:text-rose-200">
               ${earnings.reservedFunds.toFixed(2)}
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-lime-50 dark:bg-lime-900/20 border border-lime-100 dark:border-lime-500/30">
           <CardHeader className="pb-2">
             <CardDescription className="text-xs">Active Orders</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-500 dark:text-gray-300">
+            <div className="text-2xl font-bold text-lime-500 dark:text-lime-200">
               {earnings.activeOrders}
             </div>
           </CardContent>

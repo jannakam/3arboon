@@ -37,10 +37,13 @@ export interface Notification {
   read: boolean;
 }
 
+export type SubscriptionPlan = "package_a" | "package_b" | "package_c" | null;
+
 export interface VendorProfile {
   name: string;
   email: string;
   phone: string;
   businessName: string;
+  subscriptionPlan?: SubscriptionPlan;
 }
 

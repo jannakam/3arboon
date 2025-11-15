@@ -21,6 +21,7 @@ export const storage = {
         email: `${username}@example.com`,
         phone: "",
         businessName: "My Business",
+        subscriptionPlan: null,
       });
     }
   },

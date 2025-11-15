@@ -15,11 +15,11 @@ export default function LoginPage() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   useEffect(() => {
     // Load theme
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" || "light";
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" || "dark";
     setTheme(savedTheme);
   }, []);
 
